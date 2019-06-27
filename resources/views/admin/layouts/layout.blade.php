@@ -87,12 +87,12 @@
                         <div class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{asset('atrio1.4/assets/images/user.jpg')}}" alt="user">
                         </div>
-                        <ul class="dropdown-menu pullDown">
-                            <li class="body">
+                        <ul class="dropdown-menu pullDown" style="width: auto">
+                            <li class="body" style="width: 100%;">
                                 <ul class="user_dw_menu">
                                     <li>
-                                        <a href="#" onClick="return false;">
-                                            <i class="material-icons">power_settings_new</i>Logout
+                                        <a href="{{route('admin.logout')}}">
+                                            <i class="material-icons">power_settings_new</i>登出
                                         </a>
                                     </li>
                                 </ul>
@@ -327,9 +327,38 @@
         </aside>
         <!-- #END# Right Sidebar -->
     </div>
+    <section class="content">
+        <div class="container-fluid">
+            <!-- 导航 -->
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <ul class="breadcrumb breadcrumb-style ">
+                            <li class="breadcrumb-item">
+                                <h4 class="page-title">{{$current_permission->display_name}}</h4>
+                            </li>
+                            <li class="breadcrumb-item bcrumb-1">
+                                <a href="{{route('admin.index.index')}}">
+                                    <i class="fas fa-home"></i>首页
+                                </a>
+                            </li>
+                            @foreach(data_get($current_menu, 'children', []) as $item)
+                                @if($item['active'])
+                                <li class="breadcrumb-item active">{{$item['text']}}</li>
+                                @else
+                                    <li class="breadcrumb-item"><a href="index.html">{{$item['text']}}</a></li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# 导航 -->
+            @yield('content')
+        </div>
+    </section>
     @include('admin.layouts.js_new')
-    <!-- Custom Js -->
-    <script src="{{asset('atrio1.4/assets/js/pages/dashboard/dashboard2.js')}}"></script>
+    @yield('script')
 </body>
 
 </html>

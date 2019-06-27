@@ -49,8 +49,8 @@ class IndexController extends Controller
             $query->where('pid', $pid);
         }
 
-        $list = $query->paginate();
-        return view('admin.index.table', compact('list', 'region'));
+        $list = $query->paginate($request->input('pageNum', 15));
+        return view('admin.index.table_new', compact('list', 'region'));
     }
 
     public function form()
