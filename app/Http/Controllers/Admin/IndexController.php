@@ -61,7 +61,7 @@ class IndexController extends Controller
 
         $city = RegionResource::make(Region::query()->where('level', 1)->first());
         $cities = RegionResource::collection(Region::query()->where('level', 1)->limit(3)->get());
-        return view('admin.index.form', compact('img_url', 'imgs_url', 'city', 'cities', 'video_url'));
+        return view('admin.index.form_new', compact('img_url', 'imgs_url', 'city', 'cities', 'video_url'));
     }
 
     public function ajax()
